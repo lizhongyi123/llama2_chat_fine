@@ -1,0 +1,3 @@
+
+*.pyc
+datasets_processing/personal_dataset/format_data.json
