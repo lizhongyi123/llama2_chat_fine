@@ -1,3 +1,22 @@
 
 *.pyc
 datasets_processing/personal_dataset/format_data.json
+chat_7b_hf/added_tokens.json
+chat_7b_hf/config.json
+chat_7b_hf/generation_config.json
+chat_7b_hf/gitattributes.txt
+chat_7b_hf/LICENSE.txt
+chat_7b_hf/model-00001-of-00002.safetensors
+chat_7b_hf/model-00002-of-00002.safetensors
+chat_7b_hf/model.safetensors.index.json
+chat_7b_hf/pytorch_model-00001-of-00002.bin
+chat_7b_hf/pytorch_model-00002-of-00002.bin
+chat_7b_hf/pytorch_model.bin.index.json
+chat_7b_hf/README.md
+chat_7b_hf/special_tokens_map.json
+chat_7b_hf/tokenizer.json
+chat_7b_hf/tokenizer.model
+chat_7b_hf/tokenizer_config.json
+chat_7b_hf/USE_POLICY.md
+*.iml
+*.xml
