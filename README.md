@@ -1,4 +1,4 @@
-# llama2_chat_fine
+# llama2_chat_fine(llama2中文微调)
 本项目是一个对llama2进行微调的项目，我是一个llm的初学者，发现网上关于大模型的开源项目和
 微调，往往针对于技术层面，但对于初学者，最难的往往是入门的细节方面，本项目基于llama-recipes，
  meta官方的微调教程编写，修改了llama-recipes一些不合理的地方及错误，是一个不错的微调入门项目。
