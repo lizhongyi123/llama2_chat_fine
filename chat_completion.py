@@ -49,6 +49,7 @@ def main(
 
     elif sys.stdin.isatty():
         dialogs = "\n".join(sys.stdin.readlines())
+        dialogs =  [[{"role": "user", "content": f"{dialogs}"}]]
     else:
         print("No user prompt provided. Exiting.")
         sys.exit(1)
