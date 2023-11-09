@@ -82,7 +82,7 @@ def train(model, train_dataloader, eval_dataloader, tokenizer, optimizer, lr_sch
 
                     # 尝试计算模型的损失
                     loss = model(**batch).loss
-                    loss.requires_grad_(True)
+                    # loss.requires_grad_(True)
                     # if loss.requires_grad:
                     #     print("loss是计算梯度的状态")
                     # else:

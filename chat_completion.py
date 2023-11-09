@@ -87,13 +87,13 @@ def main(
 
     with torch.no_grad():
         for idx, chat in enumerate(chats):
-            # safety_checker = get_safety_checker(enable_azure_content_safety,
-            #                             enable_sensitive_topics,
-            #                             enable_saleforce_content_safety,
-            #                             )
-            # # Safety check of the user prompt
-            # safety_results = [check(dialogs[idx][0]["content"]) for check in safety_checker]
-            # are_safe = all([r[1] for r in safety_results])
+            safety_checker = get_safety_checker(enable_azure_content_safety,
+                                        enable_sensitive_topics,
+                                        enable_saleforce_content_safety,
+                                        )
+            # Safety check of the user prompt
+            safety_results = [check(dialogs[idx][0]["content"]) for check in safety_checker]
+            are_safe = all([r[1] for r in safety_results])
             are_safe =1
             if are_safe:
                 # print(f"User prompt deemed safe.")
@@ -127,8 +127,8 @@ def main(
             output_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
             # print(2, output_text)
             # Safety check of the model output
-            # safety_results = [check(output_text) for check in safety_checker]
-            # are_safe = all([r[1] for r in safety_results])
+            safety_results = [check(output_text) for check in safety_checker]
+            are_safe = all([r[1] for r in safety_results])
             are_safe = 1
             if are_safe:
                 # print("User input and model output deemed safe.")

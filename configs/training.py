@@ -21,8 +21,8 @@ class train_config:
     use_fp16: bool=False
     mixed_precision: bool=True
     val_batch_size: int=1
-    dataset = "custom_dataset"
-    # dataset = "samsum_dataset"
+    # dataset = "custom_dataset"
+    dataset = "samsum_dataset"
     peft_method: str = "lora" # None , llama_adapter, prefix
     use_peft: bool=False
     output_dir: str = "PEFT_model"

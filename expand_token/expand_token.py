@@ -27,7 +27,7 @@ tokenizer.save_pretrained(path_of_save)
 # print(len(new_token))
 #
 #
-# v = new_token.encode('打扫房间阿斯蒂芬考虑考拉时代峰峻阿德舒服了艾师傅打撒法师打发斯蒂芬')
+# v = new_token.encode('我爱中国')
 #
 # print(v)
 

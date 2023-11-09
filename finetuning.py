@@ -132,8 +132,8 @@ def main(**kwargs):
     tokenizer = LlamaTokenizer.from_pretrained(train_config.model_name)
     print('词表大小', len(tokenizer))
 
-    # 调整嵌入层大小
-    model.resize_token_embeddings(len(tokenizer))
+    # # 调整嵌入层大小
+    # model.resize_token_embeddings(len(tokenizer))
 
     tokenizer.add_special_tokens(
             {

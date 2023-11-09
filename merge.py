@@ -11,7 +11,7 @@ def main():
     device_arg = { 'device_map': 'auto' }
 
     base_model_name_or_path = r'C:\Users\Administrator\Desktop\git\llama2_chat_7b\llama_recipes\chat_7b_hf'
-    peft_model_path = r'C:\Users\Administrator\Desktop\git\llama2_chat_7b\llama_recipes\PEFT\model'
+    peft_model_path = r'C:\Users\Administrator\Desktop\git\llama2_chat_7b\llama_recipes\PEFT_model'
     
     output_dir = r'C:\Users\Administrator\Desktop\git\llama2_chat_7b\llama_recipes\new_model'
 
