@@ -72,7 +72,7 @@ python chat_completion.py --model_name chat_7b_hf
 然后在终端输入你的问题，这也是用来检测模型是否能正确回答问题的方法。
 对于第一次遇见下面代码的人
 ```
-        dialogs = "\n".join(sys.stdin.readlines())
+dialogs = "\n".join(sys.stdin.readlines())
 ```
 可能不知道怎么在终端输入，只需要将内容输入到终端，按回车切换到最后一行，再按ctrl+z，回车，meta官方的例子是有些问题的，我这里进做了很小的修该，变成了额一次性
 对话的形式，有兴趣的可以改成多轮对话，很简单，需要提醒的是我这里把llama2的安全性检测给关掉了，llama2中有三个安全监测，有本地模型检验，也有线上检验，我这里
