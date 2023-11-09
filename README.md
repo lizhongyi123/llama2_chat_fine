@@ -40,7 +40,7 @@ git clone https://github.com/lizhongyi123/llama2_chat_fine.git
 
 1. 第一步是安装依赖，
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 在运行代码的过程中，有一个windows下才会遇到的问题，bitsandbytes 库会报错，且无法运行，运行以下命令，安装可以在windows运行的库，
 ```
@@ -134,7 +134,7 @@ nccl是一种只支持linux的分布式方式，我这里改成了windows支持�
 结果 = 特征 * 矩阵A * 新矩阵B * 矩阵C...
 ```
 参考上面的例子，可以直接运行该项目中的merge.py，把其中的路径修改为使用者对应的项目，最好使用绝对路径，将合并好的新模型保存在
-new_mode文件夹中，记得把tokenizer依赖的文件也保存进来，这样就可以运行下面的代码
+new_mode文件夹中，记得把tokenizer依赖的文件也保存进来，这样就可以运行下面的代码。采用lora微调，7B模型按照我的设置，每次实际训练的模型只有400万参数。
 
 6 测试新模型
 ```angular2html
@@ -166,7 +166,11 @@ BBPE就是以一个字节为一种“字符”，不管实际字符集用了几�
 举一个BBPE的例子，中文学习的“习", 他的unicode码为\u4E60，转化成utf-8为E4B9A0，通常表示为“\xE4\xB9\xA0”。
 也就是说分词器遇到了”习“，虽然他的词表中没有，但是可以把他识别为\xE4 \xB9 \xA0， 也就是三个字节，
 ```angular2html
-new_token.encode('习') = [ , , ]
+llama2的tokenizer
+token.encode('习') = [231, 188, 163 ]
+
+扩充词表以后的新tokenizer
+token.encode('习') = [32069]
 ```
 llama2中的分词器就采用的这种技术， 当遇到不在词表中，且无法识别或处理字符时，会用UTF-8编码将这些字符转换成字节表示。所以这里可以得出一个结论，llama2
 是可以处理中文的，也就是说，不修改分词器，也可以处理中文。但是，读了上面的介绍，中国人必然会发现一个问题，一个“习”字要占3个字节，那必然导致编码后的
@@ -178,14 +182,17 @@ llama2中的分词器就采用的这种技术， 当遇到不在词表中，且�
 
 我选用了一种更简单的操作，直接向llama2的分词器中添加中文， 在expand_token.py中，我将unicode码中的中文部分和一部分标点符号加到词表中，
 总共有20000多字，这已经包含了大部分中文，运行expand_token.py文件，会将新的分词器保存到new_token文件夹中，这时你会发现，tokenizer.model
-大小并没有变，和原来是一样的，唯一的不同是多了一个文件，这个文件中多了很多汉字。这也就可以懂得，我的代码只是通过增加一个词表文件，实现中文识别的。
-可以通过expand_token.py的例子可以来查看词表长度和编码结果，想使用新的词表，只需要把增加的文件复制到模型路径中就可以
+大小并没有变，和原来是一样的，唯一的不同是多了一个文件, added_tokens.json，这个文件中多了很多汉字。这也就可以懂得，我的代码只是通过增加一个词表文件，
+实现中文识别的。 可以通过expand_token.py的例子可以来查看词表长度和编码结果，想使用新的词表，只需要把增加的文件复制到模型路径中就可以了。
 
 ## 代码修改
 上面扩充了词表以后，代码中也需要做相应的修改，才可以进行微调
 
 1. 修改模型的vocab
-
+将模型中的config.json的vocab_size修改为
+```angular2html
+  "vocab_size": 52339
+```
 2. 修改finetuning.py中的136行
 ```angular2html
     # model.resize_token_embeddings(len(tokenizer))
@@ -200,7 +207,7 @@ llama2中的分词器就采用的这种技术， 当遇到不在词表中，且�
 看了很多教程，发现没有人提到这个，不知道是否是我哪里操作不对。
 
 4.准备数据集
-这里我们使用中文数据集来对llama2进行微调， 在我的qa_huatuo.py中我处理了一个医学问答中文数据集，相关的json文件我放在了personal_dataset文件夹中，
+这里我们使用中文数据集来对llama2进行微调， 在我的qa_huatuo.py中我处理了一个[医学问答中文数据集](https://huggingface.co/datasets/FreedomIntelligence/Huatuo26M-GPTShine)，相关的json文件我放在了personal_dataset文件夹中，
 读者可以自行下载，放到该文件夹中，
 
 如果你有其他的数据集，需要修改下面的代码datasets.py中的
